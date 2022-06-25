@@ -1,0 +1,120 @@
+﻿<Window x:Class="Shop.Paviliontb"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Shop"
+         xmlns:font ="http://schemas.fontawesome.com/icons/"
+        mc:Ignorable="d"
+        Title="Paviliontb" Height="450" Width="800">
+
+    <Window.Resources>
+        <Style x:Key="BorderExit" TargetType="Border">
+            <Style.Setters>
+                <Setter Property="HorizontalAlignment" Value="Right"/>
+                <Setter Property="Width" Value="30"/>
+                <Setter Property="Height" Value="30"/>
+
+                <Setter Property="BorderBrush" Value="Yellow"/>
+                <Setter Property="BorderThickness" Value="2"/>
+                <Setter Property="CornerRadius" Value="50"/>
+            </Style.Setters>
+        </Style>
+        <Style TargetType="{x:Type Button}" x:Key="FocusButton">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="btnExit" TargetType="Button" 
+               BasedOn="{StaticResource FocusButton}">
+            <Style.Setters>
+                <Setter Property="BorderBrush" Value= "{x:Null}"/>
+                <Setter Property="Background" Value="White"/>
+            </Style.Setters>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#7FFFFFFF"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="39*"/>
+            <ColumnDefinition Width="38*"/>
+            <ColumnDefinition Width="16*"/>
+            <ColumnDefinition Width="197*"/>
+            <ColumnDefinition Width="7*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="8*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="7*"/>
+            <ColumnDefinition Width="7*"/>
+            <ColumnDefinition Width="70*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="49*"/>
+            <RowDefinition Height="12*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="12*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="28*"/>
+            <RowDefinition Height="246*"/>
+            <RowDefinition Height="60*"/>
+        </Grid.RowDefinitions>
+        <DataGrid x:Name="DGridPavilions" BorderThickness="0" FontWeight="DemiBold" Background="Transparent" RowBackground="White" AutoGenerateColumns="False" IsReadOnly="True" Margin="0,6,3,0" Grid.ColumnSpan="8" Grid.Row="5" Grid.RowSpan="3">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="*" Header="Название ТЦ" Binding="{Binding Shopping_center.Title}" ></DataGridTextColumn>
+                <DataGridTextColumn Width="*" Header="Статус ТЦ" Binding="{Binding Shopping_center.Status_center}"></DataGridTextColumn>
+                <DataGridTextColumn Width="*" Header="Номер пав." Binding="{Binding Pavilion_Number}"></DataGridTextColumn>
+                <DataGridTextColumn Width="*" Header="Статус пав." Binding="{Binding Status_pavilion}" ></DataGridTextColumn>
+                <DataGridTextColumn Width="*" Header="Этажность" Binding="{Binding Floor}" ></DataGridTextColumn>
+                <DataGridTextColumn Width="*" Header="Площадь" Binding="{Binding Square}" ></DataGridTextColumn>
+                <DataGridTextColumn Width="*" Header="Стоимость_за_квадратный_метр" Binding="{Binding Cost_per_square_meter}" ></DataGridTextColumn>
+                <DataGridTextColumn Width="*" Header="Коофициент_Добавочной_стоимости" Binding="{Binding Added_value_factor}" ></DataGridTextColumn>
+                <DataGridTemplateColumn Width="auto">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Изменить" Name="BEdi" Click="BEdi_Click"></Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Name="BtnBac" Click="BtnBac_Click" Margin="0,0,40,20" FontWeight="Bold" Height="Auto" FontFamily="Arial" Background="White" BorderBrush="{x:Null}" RenderTransformOrigin="0.095,0.559">
+            <Button.Resources>
+                <Style TargetType="Button" BasedOn="{StaticResource btnExit}"/>
+                <Style TargetType="Border" BasedOn="{StaticResource BorderExit}" />
+            </Button.Resources>
+            <Button.Content>
+                <font:ImageAwesome Icon="Solid_ArrowAltCircleLeft" Height="30"/>
+            </Button.Content>
+
+        </Button>
+
+        <ComboBox HorizontalContentAlignment="Center" Name="ComboFloor" HorizontalAlignment="Left" Margin="2,57,0,0" VerticalAlignment="Top" Width="166" Height="25" FontSize="14" FontFamily="Arial" SelectionChanged="ComboFloor_SelectionChanged" Grid.Column="8" Grid.Row="6" Grid.ColumnSpan="3"/>
+        <TextBlock HorizontalAlignment="Left" Margin="9,33,0,0" TextWrapping="Wrap" Text="Этаж" FontSize="14" VerticalAlignment="Top" Height="19" Width="121" FontFamily="Arial" FontWeight="Bold" Grid.Column="10" Grid.Row="6"/>
+        <Button Content="Добавить" x:Name="Btn_Add" Click="BtnClick_Add" Margin="32,10,10,6" FontSize="14" FontWeight="Bold" FontFamily="Arial" Height="Auto" Grid.Column="10"/>
+        <ComboBox HorizontalContentAlignment="Center" Name="ComboStatus" HorizontalAlignment="Left" Margin="7,136,0,0" VerticalAlignment="Top" Width="171" Height="26" SelectionChanged="ComboStatus_SelectionChanged" FontSize="14" FontFamily="Arial" Grid.Column="7" Grid.Row="6" Grid.ColumnSpan="4"/>
+        <TextBlock HorizontalAlignment="Left" Margin="9,112,0,0" TextWrapping="Wrap" Text="Статус павильона" FontSize="14" VerticalAlignment="Top" Height="19" Width="121" FontFamily="Arial" FontWeight="Bold" Grid.Column="10" Grid.Row="6"/>
+        <TextBox HorizontalAlignment="Left" Height="26" Text="0" Name="SquareTextFrom"
+Margin="2,220,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="49" Grid.Column="8" Grid.Row="6" Grid.ColumnSpan="3"/>
+        <TextBlock Margin="2,195,117,0" TextWrapping="Wrap" Text="От" FontSize="14" TextAlignment="Center" VerticalAlignment="Top" Height="20" Width="49" FontFamily="Arial" FontWeight="Bold" Grid.Column="8" Grid.Row="6" Grid.ColumnSpan="3"/>
+        <TextBlock Margin="56,195,35,0" TextWrapping="Wrap" Text="До" FontSize="14" TextAlignment="Center" VerticalAlignment="Top" Height="20" Width="49" FontFamily="Arial" RenderTransformOrigin="3.673,4.45" FontWeight="Bold" Grid.Column="10" Grid.Row="6"/>
+        <TextBox HorizontalAlignment="Left" Height="26" x:Name="SquareTextTo" Margin="56,220,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="49" TextChanged="SquareTextTo_TextChanged
+" Grid.Column="10" Grid.Row="6"/>
+        <Button Content="Удалить" Name="BtnDelete" Click="BtnDelete_Click" Margin="32,18,10,10" FontWeight="Bold" FontFamily="Arial" Grid.Column="10" Grid.Row="7"/>
+        <Button Content="Совмещенный фильтр" HorizontalAlignment="Left" Margin="10,1,0,0" VerticalAlignment="Top" Width="188" Click="Filter_Click" FontWeight="Bold" Grid.Column="4" Grid.Row="3" Grid.RowSpan="3" Grid.ColumnSpan="7"/>
+        <TextBlock HorizontalAlignment="Left" Margin="9,176,0,0" TextWrapping="Wrap" Text="Площадь" FontSize="14" VerticalAlignment="Top" Height="19" Width="121" FontFamily="Arial" FontWeight="Bold" Grid.Column="10" Grid.Row="6"/>
+        <Image Source="/Resources/Emblema.png" Grid.ColumnSpan="2" Margin="66,0,10,0" />
+
+    </Grid>
+</Window>

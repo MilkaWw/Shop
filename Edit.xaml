@@ -1,0 +1,50 @@
+﻿<Window x:Class="Shop.Edit"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Shop"
+        mc:Ignorable="d"
+        Title="Edit" Height="450" Width="800">
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="224"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Text="Название" HorizontalAlignment="Left" Height="37" Margin="10,10,0,0" VerticalAlignment="Top" Width="204" FontSize="20" Grid.RowSpan="2"/>
+        <TextBlock Text="Статус" HorizontalAlignment="Left" Height="37" Margin="10,10,0,0" VerticalAlignment="Top" Width="204" FontSize="20" Grid.Row="1"/>
+        <TextBlock Text="Кол-во пав." HorizontalAlignment="Left" Height="37" Margin="10,9,0,0" VerticalAlignment="Top" Width="204" FontSize="20" Grid.Row="2"/>
+        <TextBlock Text="Город" HorizontalAlignment="Left" Height="37" Margin="10,9,0,0" VerticalAlignment="Top" Width="204" FontSize="20" Grid.Row="3"/>
+        <TextBlock Text="Стоимость" HorizontalAlignment="Left" Height="37" Margin="10,9,0,0" VerticalAlignment="Top" Width="204" FontSize="20" Grid.Row="4"/>
+        <TextBlock Text="Этажность" HorizontalAlignment="Left" Height="37" Margin="10,9,0,0" VerticalAlignment="Top" Width="204" FontSize="20" Grid.Row="5"/>
+        <TextBlock Text="Коэф.Добав.Стоим." HorizontalAlignment="Left" Height="37" Margin="10,8.556,0,0" VerticalAlignment="Top" Width="204" FontSize="20" Grid.Row="6"/>
+        <TextBlock Text="Фото" HorizontalAlignment="Left" Height="37" Margin="10,14.556,0,0" VerticalAlignment="Top" Width="204" FontSize="20" Grid.Row="7" Grid.RowSpan="2"/>
+
+
+        <TextBox Text="{Binding currentShop.Title}" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left" Height="37" Margin="0,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="566" Grid.RowSpan="2"/>
+        <ComboBox SelectedItem="{Binding currentShop.Status_center}" ItemsSource="{Binding listStatus}"  Name="ComboStatusEdit" Grid.Row="1" Grid.Column="1" Height="36" Margin="0,9,10,0" VerticalAlignment="Top">
+        </ComboBox>
+        <TextBox Text="{Binding currentShop.Pavilion_Number}" Grid.Column="1" HorizontalAlignment="Left" Height="37" Margin="0,9,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="566" Grid.Row="2"/>
+        <TextBox  Text="{Binding currentShop.City}" Grid.Column="1" HorizontalAlignment="Left" Height="37" Margin="0,8,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="566" Grid.Row="3"/>
+        <TextBox  Text="{Binding currentShop.Cost}" Grid.Column="1" HorizontalAlignment="Left" Height="37" Margin="0,8,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="566" Grid.Row="4"/>
+        <TextBox  Text="{Binding currentShop.Number_of_floors}" Grid.Column="1" HorizontalAlignment="Left" Height="37" Margin="0,8,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="566" Grid.Row="5"/>
+        <TextBox Text="{Binding currentShop.The_Coefficient_Of_Added_Value}" Grid.Column="1" HorizontalAlignment="Left" Height="37" Margin="0,8.556,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="566" Grid.Row="6"/>
+        <Button Content="Сохранить" Grid.Row="8" Name="ButSave" Click="ButSave_Click" Margin="382,9.556,10,4.444" Grid.Column="1" FontWeight="Bold" FontFamily="Arial"/>
+        <Button Content="Изменить" Grid.Row="7" x:Name="But" Click="But_Click" Margin="10,9.556,10,4.444" Grid.Column="1" FontWeight="Bold" FontFamily="Arial"/>
+        <Button Content="Список Пав." Grid.Row="8" x:Name="ButPav" Click="ButPav_Click" Margin="10,9.556,38,4.444" FontWeight="Bold" FontFamily="Arial"/>
+
+    </Grid>
+</Window>

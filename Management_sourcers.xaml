@@ -1,0 +1,111 @@
+﻿<Window x:Class="Shop.Management_sourcers"
+     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Shop"
+        
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:font ="http://schemas.fontawesome.com/icons/"
+     mc:Ignorable="d"
+        Title="Management_sourcers" Height="450" Width="800">
+    <Window.Resources>
+        <Style x:Key="BorderExit" TargetType="Border">
+            <Style.Setters>
+                <Setter Property="HorizontalAlignment" Value="Right"/>
+                <Setter Property="Width" Value="30"/>
+                <Setter Property="Height" Value="30"/>
+
+                <Setter Property="BorderBrush" Value="Yellow"/>
+                <Setter Property="BorderThickness" Value="2"/>
+                <Setter Property="CornerRadius" Value="50"/>
+            </Style.Setters>
+        </Style>
+        <Style TargetType="{x:Type Button}" x:Key="FocusButton">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="btnExit" TargetType="Button" 
+               BasedOn="{StaticResource FocusButton}">
+            <Style.Setters>
+                <Setter Property="BorderBrush" Value= "{x:Null}"/>
+                <Setter Property="Background" Value="White"/>
+            </Style.Setters>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#7FFFFFFF"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="47*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="9*"/>
+            <RowDefinition Height="13*"/>
+            <RowDefinition Height="237*"/>
+            <RowDefinition Height="53*"/>
+            <RowDefinition Height="41*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="131*"/>
+            <ColumnDefinition Width="367*"/>
+            <ColumnDefinition Width="158*"/>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="12*"/>
+            <ColumnDefinition Width="50*"/>
+            <ColumnDefinition Width="70*"/>
+        </Grid.ColumnDefinitions>
+
+        <DataGrid x:Name="DGridEmp" BorderThickness="0" FontWeight="DemiBold" Background="Transparent" ScrollViewer.CanContentScroll="False" RowBackground="LightCoral" AutoGenerateColumns="False" IsReadOnly="True" Margin="0,0,12,0" FontSize="14" FontFamily="Arial" Grid.ColumnSpan="3" Grid.Row="4" Grid.RowSpan="3">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="*" Header="Фамилия" Binding="{Binding Surname}"></DataGridTextColumn>
+                <DataGridTextColumn Width="*" Header="Имя" Binding="{Binding Name}" ></DataGridTextColumn>
+                <DataGridTextColumn Width="*" Header="Отчество" Binding="{Binding Middle_name}" ></DataGridTextColumn>
+                <DataGridTextColumn Width="*" Header="Логин" Binding="{Binding Login}" ></DataGridTextColumn>
+                <DataGridTextColumn Width="*" Header="Пароль" Binding="{Binding Password}" ></DataGridTextColumn>
+                <DataGridTextColumn Width="*" Header="Роль" Binding="{Binding Role}" ></DataGridTextColumn>
+                <DataGridTextColumn Width="*" Header="Номер телефона" Binding="{Binding Phone_Number}" ></DataGridTextColumn>
+                <DataGridTemplateColumn Header="Фото">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding Photo}" Width="150"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Редактировать" Name="BtnEdit" Click="BtnEdit_Click"></Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Name="BtnBac" Click="BtnBac_Click" Margin="0,0,90,20" FontWeight="Bold" Height="Auto" FontFamily="Arial" Background="White" BorderBrush="{x:Null}" RenderTransformOrigin="0.095,0.559">
+            <Button.Resources>
+                <Style TargetType="Button" BasedOn="{StaticResource btnExit}"/>
+                <Style TargetType="Border" BasedOn="{StaticResource BorderExit}" />
+            </Button.Resources>
+            <Button.Content>
+                <font:ImageAwesome Icon="Solid_ArrowAltCircleLeft" Height="27"/>
+            </Button.Content>
+
+        </Button>
+        <Button Content="Добавить" Name="BtnAdd" Click="BtnAdd_Click" HorizontalAlignment="Left" Margin="8,1,0,0" VerticalAlignment="Top" Width="102" Height="30" Grid.Column="5" Grid.Row="5" Grid.ColumnSpan="2"/>
+        <Button Content="Удалить" Name="BtnDelete" Click="BtnDelete_Click" Margin="8,0,0,0" HorizontalAlignment="Left" Width="98" VerticalAlignment="Top" Grid.Column="5" Grid.Row="6" Grid.ColumnSpan="2"/>
+        <materialDesign:PackIcon Kind="Search" Width="Auto" Height="30" Margin="26,25,0,0" Grid.Column="6" Grid.RowSpan="2"/>
+        <TextBox Height="30" Name="SearchBox" Margin="1,25,67,0" TextChanged="SearchBox_TextChanged" VerticalAlignment="Top" Grid.Column="2" Grid.ColumnSpan="5" Grid.RowSpan="2"/>
+        <Image Source="Resources\Emblema.png" Margin="91,0,0,0" HorizontalAlignment="Left" Width="88" Height="55" VerticalAlignment="Top" Grid.ColumnSpan="2" Grid.RowSpan="2"></Image>
+    </Grid>
+</Window>
