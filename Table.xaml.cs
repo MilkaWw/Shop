@@ -25,7 +25,16 @@ namespace Shop
             
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        
+
+        private void ButtonLI_Click(object sender, RoutedEventArgs e)
+        {
+            ListArr ListArr = new ListArr();
+            this.Close();
+            ListArr.Show();
+        }
+
+        private void ButtonSP_Click(object sender, RoutedEventArgs e)
         {
             Shop_centres Shop_centres = new Shop_centres();
             this.Close();

@@ -23,6 +23,8 @@ private Pavilion pavilion;
             Start = DateTime.Today;
             Stop = DateTime.Today;
             tenantsCollection = ShopEntities.GetContext().Tenants.ToList(); //c адерндаторов чтобы знать кто арендует
+            var tEN = new Tenants();
+           
             DataContext = this;
         }
 

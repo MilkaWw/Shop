@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Хранилище ShopModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Хранилище ShopModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Pavilion">
           <Key>
             <PropertyRef Name="Pavilion_Number" />
@@ -75,7 +75,7 @@
             <PropertyRef Name="Tenant_ID" />
           </Key>
           <Property Name="Tenant_ID" Type="int" Nullable="false" />
-          <Property Name="Title" Type="nvarchar" MaxLength="25" />
+          <Property Name="Title_ten" Type="nvarchar" MaxLength="25" />
           <Property Name="Phone_number" Type="nvarchar" MaxLength="20" />
           <Property Name="Address" Type="nvarchar" MaxLength="25" />
         </EntityType>
@@ -139,6 +139,7 @@
           <Parameter Name="tenant_id" Type="bigint" Mode="In" />
           <Parameter Name="employee_id" Type="bigint" Mode="In" />
         </Function>
+        <Function Name="Sessia2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
           <Parameter Name="owner_id" Type="int" Mode="In" />
@@ -169,7 +170,6 @@
           <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <Function Name="threeYear" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="Хранилище ShopModelContainer">
           <EntitySet Name="Pavilion" EntityType="Self.Pavilion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rents" EntityType="Self.Rents" Schema="dbo" store:Type="Tables" />
@@ -194,7 +194,8 @@
             <End Role="Rents" EntitySet="Rents" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ShopModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -275,7 +276,7 @@
             <PropertyRef Name="Tenant_ID" />
           </Key>
           <Property Name="Tenant_ID" Type="Int32" Nullable="false" />
-          <Property Name="Title" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="Title_ten" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
           <Property Name="Phone_number" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="Address" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Rents" Relationship="Self.FK_Rents_Tenants" FromRole="Tenants" ToRole="Rents" />
@@ -362,6 +363,7 @@
             <Parameter Name="tenant_id" Mode="In" Type="Int64" />
             <Parameter Name="employee_id" Mode="In" Type="Int64" />
           </FunctionImport>
+          <FunctionImport Name="Sessia2" ReturnType="Collection(ShopModel.Sessia2_Result)" />
           <FunctionImport Name="sp_alterdiagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
             <Parameter Name="owner_id" Mode="In" Type="Int32" />
@@ -392,8 +394,17 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
-          <FunctionImport Name="threeYear" />
         </EntityContainer>
+        <ComplexType Name="Sessia2_Result">
+          <Property Type="String" Name="Title" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="City" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="Pavilion_Number" Nullable="false" MaxLength="7" />
+          <Property Type="DateTime" Name="The_Beginning_of_the_Lease" Nullable="false" />
+          <Property Type="DateTime" Name="End_of_Lease" Nullable="false" />
+          <Property Type="Double" Name="priceRent" Nullable="true" />
+          <Property Type="String" Name="Status_rent" Nullable="false" MaxLength="25" />
+          <Property Type="String" Name="Title_ten" Nullable="true" MaxLength="25" />
+        </ComplexType>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
           <Property Type="Binary" Name="definition" Nullable="true" />
@@ -484,13 +495,27 @@
             <EntityTypeMapping TypeName="ShopModel.Tenants">
               <MappingFragment StoreEntitySet="Tenants">
                 <ScalarProperty Name="Tenant_ID" ColumnName="Tenant_ID" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Title_ten" ColumnName="Title_ten" />
                 <ScalarProperty Name="Phone_number" ColumnName="Phone_number" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="RentOrBookPavilionInMall" FunctionName="Хранилище ShopModel.RentOrBookPavilionInMall" />
+          <FunctionImportMapping FunctionImportName="Sessia2" FunctionName="Хранилище ShopModel.Sessia2">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ShopModel.Sessia2_Result">
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Pavilion_Number" ColumnName="Pavilion_Number" />
+                <ScalarProperty Name="The_Beginning_of_the_Lease" ColumnName="The_Beginning_of_the_Lease" />
+                <ScalarProperty Name="End_of_Lease" ColumnName="End_of_Lease" />
+                <ScalarProperty Name="priceRent" ColumnName="priceRent" />
+                <ScalarProperty Name="Status_rent" ColumnName="Status_rent" />
+                <ScalarProperty Name="Title_ten" ColumnName="Title_ten" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="Хранилище ShopModel.sp_alterdiagram" />
           <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="Хранилище ShopModel.sp_creatediagram" />
           <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="Хранилище ShopModel.sp_dropdiagram" />
@@ -515,7 +540,6 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="Хранилище ShopModel.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="Хранилище ShopModel.sp_upgraddiagrams" />
-          <FunctionImportMapping FunctionImportName="threeYear" FunctionName="Хранилище ShopModel.threeYear" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

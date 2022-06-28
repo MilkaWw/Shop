@@ -80,13 +80,7 @@
                 <DataGridTextColumn Width="*" Header="Стоимость" Binding="{Binding Cost}" ></DataGridTextColumn>
                 <DataGridTextColumn Width="*" Header="Этажность" Binding="{Binding Number_of_floors}" ></DataGridTextColumn>
                 <DataGridTextColumn Width="*" Header="Коэф.Добав.Стоим." Binding="{Binding The_Coefficient_Of_Added_Value}" ></DataGridTextColumn>
-                <DataGridTemplateColumn Header="Фото">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Image Source="{Binding Photo}" Width="150"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
+               
                 <DataGridTemplateColumn Width="auto">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

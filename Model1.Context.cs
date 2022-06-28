@@ -28,7 +28,7 @@ namespace Shop
                 _context = new ShopEntities();
             return _context;
         }
-        
+      
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -73,6 +73,11 @@ namespace Shop
                 new ObjectParameter("employee_id", typeof(long));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("RentOrBookPavilionInMall", status_actionParameter, pavilion_numberParameter, mall_idParameter, start_dateParameter, end_dateParameter, tenant_idParameter, employee_idParameter);
+        }
+    
+        public virtual ObjectResult<Sessia2_Result> Sessia2()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sessia2_Result>("Sessia2");
         }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
@@ -176,11 +181,6 @@ namespace Shop
         public virtual int sp_upgraddiagrams()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
-        }
-    
-        public virtual int threeYear()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("threeYear");
         }
     }
 }
